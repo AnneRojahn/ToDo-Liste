@@ -14,7 +14,10 @@ public class NoteBL {
 
     public ValidationResult validateNote(NoteBE note) {
         //TODO Anne: Implement
-        if(note.getTitle() == NULL)
+        if(note.getTitle() == null){
+            ValidationResult err = new ValidationResult();
+            err.addError("Titel null");
+        }
         return new ValidationResult();
     }
 }

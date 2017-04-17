@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.ArrayAdapter;
@@ -108,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
      */
     public void saveToDo(View view) {
         //initialization
-        SharedPreferences mSave = getApplicationContext().getSharedPreferences(SHARED_PREFERENCES_KEY, 0);
+        //SharedPreferences mSave = getApplicationContext().getSharedPreferences(SHARED_PREFERENCES_KEY, 0);
 
         Intent intent = new Intent(this, MainActivity.class);
         EditText editText = (EditText) findViewById(R.id.edit_message);
@@ -123,7 +124,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void delete() {
         NoteDAO DAO = new NoteDAO(getApplicationContext());
-      //  NoteBE note = new NoteBE(this);
+     //   NoteBE note = new NoteBE(this);
        // DAO.delete(note);
     }
 
