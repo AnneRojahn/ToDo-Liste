@@ -11,7 +11,7 @@ public class NoteBE {
 
     private String text;
 
-    private String titel;
+    private String title;
 
     private Date dueDate;
 
@@ -40,11 +40,11 @@ public class NoteBE {
         this.text = text;
     }
 
-    public String getTitel() {
-        return titel;
+    public String getTitle() {
+        return title;
     }
 
-    public void setTitel(String titel) {
-        this.titel = titel;
+    public void setTitle(String title) {
+        this.title = title;
     }
 }
