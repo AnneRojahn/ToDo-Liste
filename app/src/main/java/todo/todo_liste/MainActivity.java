@@ -7,11 +7,20 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.ArrayAdapter;
+
+import java.util.ArrayList;
+import java.util.List;
+
 
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.appindexing.Thing;
 import com.google.android.gms.common.api.GoogleApiClient;
+
+import app.todo.dao.NoteDAO;
+import app.todo.model.NoteBE;
 
 public class MainActivity extends AppCompatActivity {
     public final static String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
@@ -35,6 +44,17 @@ public class MainActivity extends AppCompatActivity {
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+        NoteDAO dao=new NoteDAO();
+
+        List<NoteBE> noteList= dao.loadAll();
+        List<String> todoTextList = new ArrayList<>(noteList.size());
+        for(NoteBE note : noteList) {
+            todoTextList.add(note.getText());
+        }
+
+        ArrayAdapter<String> noteListAdapter=new ArrayAdapter<String>(this, R.layout.list_item_notes,R.id.list_item_noteList_textview, todoTextList);
+        ListView displayNotesView = (ListView) findViewById(R.id.listview_Notes);
+        displayNotesView.setAdapter(noteListAdapter);
     }
 
     @Override
@@ -89,20 +109,13 @@ public class MainActivity extends AppCompatActivity {
         //initialization
         SharedPreferences mSave = getApplicationContext().getSharedPreferences(SHARED_PREFERENCES_KEY, 0);
 
-        Intent intent = new Intent(this, DisplayMessageActivity.class);
+        Intent intent = new Intent(this, MainActivity.class);
         EditText editText = (EditText) findViewById(R.id.edit_message);
         String message = editText.getText().toString();
         intent.putExtra(EXTRA_MESSAGE, message);
-
-        // if(mSave.getString(TODO1, null).equals("null"))
-        //{
-        SharedPreferences.Editor editor = mSave.edit();
-        String keyOfNewEntry = new StringBuilder().append(TODO1).toString();
-        editor.putString(keyOfNewEntry, message);
-        editor.commit();
-        //  }
-
-
+        NoteBE newNote = new NoteBE(message);
+        NoteDAO dao = new NoteDAO();
+        dao.save(newNote);
         startActivity(intent);
     }
 
