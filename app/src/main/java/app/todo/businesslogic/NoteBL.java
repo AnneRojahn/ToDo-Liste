@@ -14,6 +14,7 @@ public class NoteBL {
 
     public ValidationResult validateNote(NoteBE note) {
         //TODO Anne: Implement
+        if(note.getTitle() == NULL)
         return new ValidationResult();
     }
 }

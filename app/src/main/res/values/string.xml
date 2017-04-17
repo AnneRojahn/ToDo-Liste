@@ -3,4 +3,5 @@
     <string name="edit_message">ToDo Eingabe</string>
     <string name="button_save">Speichern</string>
     <string name="button_show">Alle anzeigen</string>
+    <string name="button_delete">Löschen</string>
 </resources>

@@ -19,6 +19,7 @@ import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.appindexing.Thing;
 import com.google.android.gms.common.api.GoogleApiClient;
 
+import app.todo.businesslogic.NoteBL;
 import app.todo.dao.NoteDAO;
 import app.todo.model.NoteBE;
 
@@ -47,12 +48,12 @@ public class MainActivity extends AppCompatActivity {
         NoteDAO dao=new NoteDAO( getApplicationContext());
 
         List<NoteBE> noteList= dao.loadAll();
-        List<String> todoTextList = new ArrayList<>(noteList.size());
+        List<String> todoTitleList = new ArrayList<>(noteList.size());
         for(NoteBE note : noteList) {
-            todoTextList.add(note.getText());
+            todoTitleList.add(note.getTitle());
         }
 
-        ArrayAdapter<String> noteListAdapter=new ArrayAdapter<String>(this, R.layout.list_item_notes,R.id.list_item_noteList_textview, todoTextList);
+        ArrayAdapter<String> noteListAdapter=new ArrayAdapter<String>(this, R.layout.list_item_notes,R.id.list_item_noteList_textview, todoTitleList);
         ListView displayNotesView = (ListView) findViewById(R.id.listview_Notes);
         displayNotesView.setAdapter(noteListAdapter);
     }
@@ -114,17 +115,16 @@ public class MainActivity extends AppCompatActivity {
         String message = editText.getText().toString();
         intent.putExtra(EXTRA_MESSAGE, message);
         NoteBE newNote = new NoteBE(message);
+        newNote.setTitle(message);
         NoteDAO dao = new NoteDAO(getApplicationContext());
         dao.save(newNote);
         startActivity(intent);
     }
 
-    public void showToDo(View view) {
-        Intent intent = new Intent(this, DisplayAllActivity.class);
-        // EditText editText = (EditText) findViewById(R.id.edit_message);
-        //String message = "Fertig?!";
-        //intent.putExtra(EXTRA_MESSAGE, message);
-        startActivity(intent);
+    public void delete() {
+        NoteDAO DAO = new NoteDAO(getApplicationContext());
+      //  NoteBE note = new NoteBE(this);
+       // DAO.delete(note);
     }
 
     /**
