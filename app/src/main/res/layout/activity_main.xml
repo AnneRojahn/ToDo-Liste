@@ -28,5 +28,10 @@
         android:layout_alignParentRight="true"
         android:text="@string/button_save"
         android:onClick="saveToDo" />
+    <ListView
+        android:id="@+id/listview_Notes"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/save_to_do"/>
 
 </RelativeLayout>
