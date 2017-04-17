@@ -1,5 +1,7 @@
 package app.todo.model;
 
+import java.sql.Date;
+
 /**
  * Created by 1234 on 17.04.2017.
  */
@@ -8,6 +10,12 @@ public class NoteBE {
     private int id;
 
     private String text;
+
+    private String titel;
+
+    private Date dueDate;
+
+    private StatusEnum status;
 
     public NoteBE() {
     }
@@ -30,5 +38,13 @@ public class NoteBE {
 
     public void setText(String text) {
         this.text = text;
+    }
+
+    public String getTitel() {
+        return titel;
+    }
+
+    public void setTitel(String titel) {
+        this.titel = titel;
     }
 }
