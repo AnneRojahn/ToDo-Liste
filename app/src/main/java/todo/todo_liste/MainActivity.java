@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
-        NoteDAO dao=new NoteDAO();
+        NoteDAO dao=new NoteDAO( getApplicationContext());
 
         List<NoteBE> noteList= dao.loadAll();
         List<String> todoTextList = new ArrayList<>(noteList.size());
@@ -114,7 +114,7 @@ public class MainActivity extends AppCompatActivity {
         String message = editText.getText().toString();
         intent.putExtra(EXTRA_MESSAGE, message);
         NoteBE newNote = new NoteBE(message);
-        NoteDAO dao = new NoteDAO();
+        NoteDAO dao = new NoteDAO(getApplicationContext());
         dao.save(newNote);
         startActivity(intent);
     }
