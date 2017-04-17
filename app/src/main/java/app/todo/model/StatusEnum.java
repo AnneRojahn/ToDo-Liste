@@ -17,4 +17,13 @@ public enum StatusEnum {
     public String getPersistenceString() {
         return persistenceString;
     }
+
+    public static StatusEnum parseFromPersistenceString(String persistenceString) {
+        for(StatusEnum enumValue : StatusEnum.values()) {
+            if(enumValue.getPersistenceString().equals(persistenceString)) {
+                return enumValue;
+            }
+        }
+        return null;
+    }
 }

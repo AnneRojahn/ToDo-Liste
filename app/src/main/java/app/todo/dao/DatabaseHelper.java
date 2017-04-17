@@ -9,7 +9,7 @@ import android.database.sqlite.SQLiteOpenHelper;
  */
  class DatabaseHelper extends SQLiteOpenHelper {
 
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 4;
     private static final String DATABASE_NAME = "ToDoApp.db";
 
      DatabaseHelper(Context context) {
