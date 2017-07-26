@@ -12,6 +12,8 @@
         android:text="@string/button_show"
         android:onClick="showToDo"/>
 
+    <!-- Test-Kommentar -->
+
     <EditText android:id="@+id/edit_message"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
