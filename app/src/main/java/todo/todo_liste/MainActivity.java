@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.ArrayAdapter;
@@ -19,6 +20,7 @@ import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.appindexing.Thing;
 import com.google.android.gms.common.api.GoogleApiClient;
 
+import app.todo.businesslogic.NoteBL;
 import app.todo.dao.NoteDAO;
 import app.todo.model.NoteBE;
 
@@ -47,12 +49,12 @@ public class MainActivity extends AppCompatActivity {
         NoteDAO dao=new NoteDAO( getApplicationContext());
 
         List<NoteBE> noteList= dao.loadAll();
-        List<String> todoTextList = new ArrayList<>(noteList.size());
+        List<String> todoTitleList = new ArrayList<>(noteList.size());
         for(NoteBE note : noteList) {
-            todoTextList.add(note.getText());
+            todoTitleList.add(note.getTitle());
         }
 
-        ArrayAdapter<String> noteListAdapter=new ArrayAdapter<String>(this, R.layout.list_item_notes,R.id.list_item_noteList_textview, todoTextList);
+        ArrayAdapter<String> noteListAdapter=new ArrayAdapter<String>(this, R.layout.list_item_notes,R.id.list_item_noteList_textview, todoTitleList);
         ListView displayNotesView = (ListView) findViewById(R.id.listview_Notes);
         displayNotesView.setAdapter(noteListAdapter);
     }
@@ -106,9 +108,6 @@ public class MainActivity extends AppCompatActivity {
      * Called when user clicks the Send button
      */
     public void saveToDo(View view) {
-        //initialization
-        SharedPreferences mSave = getApplicationContext().getSharedPreferences(SHARED_PREFERENCES_KEY, 0);
-
         Intent intent = new Intent(this, MainActivity.class);
         EditText editText = (EditText) findViewById(R.id.edit_message);
         String message = editText.getText().toString();

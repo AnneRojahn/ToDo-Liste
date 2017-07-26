@@ -20,8 +20,8 @@ public class NoteBE {
     public NoteBE() {
     }
 
-    public NoteBE(String text) {
-        this.text = text;
+    public NoteBE(String title) {
+        this.title = title;
     }
 
     public int getId() {
