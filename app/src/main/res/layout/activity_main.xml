@@ -5,9 +5,19 @@
     android:paddingLeft="16dp"
     android:paddingRight="16dp">
 
+    <Button
+        android:id="@+id/show_all"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/button_show"
+        android:onClick="showToDo"/>
+
+    <!-- Test-Kommentar -->
+
     <EditText android:id="@+id/edit_message"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_below="@id/show_all"
         android:layout_alignParentLeft ="true"
         android:layout_toLeftOf="@+id/save_to_do"
         android:hint="@string/edit_message" />
@@ -16,10 +26,10 @@
         android:id="@id/save_to_do"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
+        android:layout_below="@id/show_all"
         android:layout_alignParentRight="true"
         android:text="@string/button_save"
-        android:onClick="saveToDo"
-        android:layout_alignParentTop="true" />
+        android:onClick="saveToDo" />
     <ListView
         android:id="@+id/listview_Notes"
         android:layout_width="match_parent"

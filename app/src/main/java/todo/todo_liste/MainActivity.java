@@ -108,24 +108,22 @@ public class MainActivity extends AppCompatActivity {
      * Called when user clicks the Send button
      */
     public void saveToDo(View view) {
-        //initialization
-        //SharedPreferences mSave = getApplicationContext().getSharedPreferences(SHARED_PREFERENCES_KEY, 0);
-
         Intent intent = new Intent(this, MainActivity.class);
         EditText editText = (EditText) findViewById(R.id.edit_message);
         String message = editText.getText().toString();
         intent.putExtra(EXTRA_MESSAGE, message);
         NoteBE newNote = new NoteBE(message);
-        newNote.setTitle(message);
         NoteDAO dao = new NoteDAO(getApplicationContext());
         dao.save(newNote);
         startActivity(intent);
     }
 
-    public void delete() {
-        NoteDAO DAO = new NoteDAO(getApplicationContext());
-     //   NoteBE note = new NoteBE(this);
-       // DAO.delete(note);
+    public void showToDo(View view) {
+        Intent intent = new Intent(this, DisplayAllActivity.class);
+        // EditText editText = (EditText) findViewById(R.id.edit_message);
+        //String message = "Fertig?!";
+        //intent.putExtra(EXTRA_MESSAGE, message);
+        startActivity(intent);
     }
 
     /**
