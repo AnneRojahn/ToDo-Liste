@@ -12,6 +12,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import app.todo.model.NoteBE;
+import todo.todo_liste.R;
 
 import static todo.todo_liste.R.id.delete;
 
@@ -45,7 +46,7 @@ public class NoteBEListAdapter extends ArrayAdapter<NoteBE> {
         holder.removePaymentButton = (Button)row.findViewById(delete);
         holder.removePaymentButton.setTag(holder.noteBE);
 
-        holder.name = (TextView)row.findViewById(list_item_noteList_textview);
+        holder.name = (TextView)row.findViewById(R.id.list_item_noteList_textview);
         //holder.value = (TextView)row.findViewById(R.id.atomPay_value);
 
         row.setTag(holder);
