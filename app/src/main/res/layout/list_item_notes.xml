@@ -18,7 +18,7 @@
 </TextView>
 
 <Button
-android:id="@id/save_to_do"
+android:id="@+id/delete"
 android:layout_width="100dp"
 android:layout_height="wrap_content"
 android:layout_alignParentRight="true"
