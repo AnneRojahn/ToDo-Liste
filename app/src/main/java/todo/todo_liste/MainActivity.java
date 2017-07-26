@@ -51,7 +51,11 @@ public class MainActivity extends AppCompatActivity {
         List<NoteBE> noteList= dao.loadAll();
         List<String> todoTitleList = new ArrayList<>(noteList.size());
         for(NoteBE note : noteList) {
-            todoTitleList.add(note.getTitle());
+            if(note.getTitle() != null) {
+                todoTitleList.add(note.getTitle());
+            } else{
+                todoTitleList.add("No Title");
+            }
         }
 
         ArrayAdapter<String> noteListAdapter=new ArrayAdapter<String>(this, R.layout.list_item_notes,R.id.list_item_noteList_textview, todoTitleList);

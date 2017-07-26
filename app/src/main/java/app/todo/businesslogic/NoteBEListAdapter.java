@@ -14,8 +14,6 @@ import java.util.List;
 import app.todo.model.NoteBE;
 import todo.todo_liste.R;
 
-import static todo.todo_liste.R.id.delete;
-
 /**
  * Created by 1234 on 25.07.2017.
  */
@@ -43,7 +41,7 @@ public class NoteBEListAdapter extends ArrayAdapter<NoteBE> {
 
         holder = new NoteBEHolder();
         holder.noteBE = items.get(position);
-        holder.removePaymentButton = (Button)row.findViewById(delete);
+        holder.removePaymentButton = (Button)row.findViewById(0); //TODO ANNE
         holder.removePaymentButton.setTag(holder.noteBE);
 
         holder.name = (TextView)row.findViewById(R.id.list_item_noteList_textview);
