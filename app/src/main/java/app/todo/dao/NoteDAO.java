@@ -59,7 +59,13 @@ public class NoteDAO {
         String[] selectionArgs = {String.valueOf(note.getId())};
         database.delete(TABLE_NAME, selection, selectionArgs);
     }
-
+/*
+    public void delete(){
+        String selection = "true = ?";
+        String[] selectionArgs = {String.valueOf(true)};
+        database.delete(TABLE_NAME, selection ,selectionArgs);
+    }
+*/
     public List<NoteBE> loadAll() {
         String sortOrder = COLUMN_NAME_ID + " ASC";
         Cursor cursor = database.query(TABLE_NAME, ALL_COLUMNS, null, null, null, null, sortOrder);

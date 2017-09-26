@@ -7,11 +7,19 @@
 
     <!-- Test-Kommentar -->
 
+    <Button
+        android:id = "@+id/delete_all"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/button_delete_all"
+        android:onClick="deleteAll" />
+
     <EditText android:id="@+id/edit_message"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft ="true"
         android:layout_toLeftOf="@+id/save_to_do"
+        android:layout_below="@id/delete_all"
         android:hint="@string/edit_message" />
 
     <Button
@@ -20,6 +28,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:text="@string/button_save"
+        android:layout_below="@id/delete_all"
         android:onClick="saveToDo" />
     <ListView
         android:id="@+id/listview_Notes"

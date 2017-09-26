@@ -1,15 +1,12 @@
 package todo.todo_liste;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.ArrayAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +17,7 @@ import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.appindexing.Thing;
 import com.google.android.gms.common.api.GoogleApiClient;
 
-import app.todo.businesslogic.NoteBL;
+import app.todo.adapter.NoteBEAdapter;
 import app.todo.dao.NoteDAO;
 import app.todo.model.NoteBE;
 
@@ -48,7 +45,8 @@ public class MainActivity extends AppCompatActivity {
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
         NoteDAO dao=new NoteDAO( getApplicationContext());
 
-        List<NoteBE> noteList= dao.loadAll();
+        //generate list
+        List<NoteBE> noteList = dao.loadAll();
         List<String> todoTitleList = new ArrayList<>(noteList.size());
         for(NoteBE note : noteList) {
             if(note.getTitle() != null) {
@@ -58,9 +56,20 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-        ArrayAdapter<String> noteListAdapter=new ArrayAdapter<String>(this, R.layout.list_item_notes,R.id.list_item_noteList_textview, todoTitleList);
-        ListView displayNotesView = (ListView) findViewById(R.id.listview_Notes);
-        displayNotesView.setAdapter(noteListAdapter);
+       // ArrayAdapter<String> noteListAdapter=new ArrayAdapter<String>(this, R.layout.list_item_notes,R.id.list_item_noteList_textview, todoTitleList);
+      //  ListView displayNotesView = (ListView) findViewById(R.id.listview_Notes);
+       // displayNotesView.setAdapter(noteListAdapter);
+
+
+       // list.add("item1");
+        //list.add("item2");
+
+        //instantiate custom adapter
+        NoteBEAdapter adapter = new NoteBEAdapter(this, noteList);
+
+        //handle listview and assign adapter
+        ListView lView = (ListView)findViewById(R.id.listview_Notes);
+        lView.setAdapter(adapter);
     }
 
     @Override
@@ -119,6 +128,18 @@ public class MainActivity extends AppCompatActivity {
         NoteBE newNote = new NoteBE(message);
         NoteDAO dao = new NoteDAO(getApplicationContext());
         dao.save(newNote);
+        startActivity(intent);
+    }
+
+    public void deleteAll(View view)
+    {
+        Intent intent = new Intent(this, MainActivity.class);
+        NoteDAO dao = new NoteDAO(getApplicationContext());
+        List<NoteBE> list = dao.loadAll();
+        for(NoteBE note : list)
+        {
+            dao.delete(note);
+        }
         startActivity(intent);
     }
 

@@ -5,4 +5,5 @@
     <string name="button_show">Alle anzeigen</string>
     <string name="title_activity_create_note">CreateNoteActivity</string>
     <string name="button_delete">Löschen</string>
+    <string name="button_delete_all">Alle löschen</string>
 </resources>
