@@ -133,6 +133,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void deleteAll(View view)
     {
+        // TODO: 26.09.2017 Einbauen, dass vorher gefragt wird, ob man wirklich löschen möchte 
         Intent intent = new Intent(this, MainActivity.class);
         NoteDAO dao = new NoteDAO(getApplicationContext());
         List<NoteBE> list = dao.loadAll();
@@ -159,3 +160,4 @@ public class MainActivity extends AppCompatActivity {
                 .build();
     }
 }
+
