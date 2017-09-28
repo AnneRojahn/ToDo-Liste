@@ -1,5 +1,7 @@
 package todo.todo_liste;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
@@ -25,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     public final static String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
     public final static String SHARED_PREFERENCES_KEY = "anne.toDoApp.toDoMessage";
     public final static String TODO1 = "key";
+    protected static final int DIALOG_REMOVE_All = 1;
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -55,14 +58,6 @@ public class MainActivity extends AppCompatActivity {
                 todoTitleList.add("No Title");
             }
         }
-
-       // ArrayAdapter<String> noteListAdapter=new ArrayAdapter<String>(this, R.layout.list_item_notes,R.id.list_item_noteList_textview, todoTitleList);
-      //  ListView displayNotesView = (ListView) findViewById(R.id.listview_Notes);
-       // displayNotesView.setAdapter(noteListAdapter);
-
-
-       // list.add("item1");
-        //list.add("item2");
 
         //instantiate custom adapter
         NoteBEAdapter adapter = new NoteBEAdapter(this, noteList);
@@ -131,9 +126,34 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void deleteAll(View view)
+    public void deleteAll(final View view)
     {
-        // TODO: 26.09.2017 Einbauen, dass vorher gefragt wird, ob man wirklich löschen möchte 
+        AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
+        alertDialog.setTitle("Warnung");
+        alertDialog.setMessage("Sollen alle Notizen gelöscht werden?");
+        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Ok",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        NoteDAO dao = new NoteDAO(getApplicationContext());
+                        List<NoteBE> list = dao.loadAll();
+                        for(NoteBE note : list)
+                        {
+                            dao.delete(note);
+                        }
+                        // TODO: 28.09.2017 Anzeige muss nach löschen direkt aktualisiert werden 
+                    }
+                });
+        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Abbruch",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+        alertDialog.show();
+
+        /*
         Intent intent = new Intent(this, MainActivity.class);
         NoteDAO dao = new NoteDAO(getApplicationContext());
         List<NoteBE> list = dao.loadAll();
@@ -142,6 +162,7 @@ public class MainActivity extends AppCompatActivity {
             dao.delete(note);
         }
         startActivity(intent);
+        */
     }
 
     /**
@@ -160,4 +181,3 @@ public class MainActivity extends AppCompatActivity {
                 .build();
     }
 }
-

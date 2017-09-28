@@ -6,4 +6,7 @@
     <string name="title_activity_create_note">CreateNoteActivity</string>
     <string name="button_delete">Löschen</string>
     <string name="button_delete_all">Alle löschen</string>
+    <string name="dialog_remove_all_message">Sollen alle Einträge gelöscht werden?</string>
+    <string name="dialog_remove_all_positive">Ja</string>
+    <string name="dialog_remove_all_negative">Nein</string>
 </resources>
